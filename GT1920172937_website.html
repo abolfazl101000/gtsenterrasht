@@ -1,0 +1,331 @@
+<!DOCTYPE html><html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GT Senter</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      direction: rtl;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    header {
+      background-color: #3b5a36;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+      text-align: center;
+      position: relative;
+    }
+    .menu-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      color: white;
+    }
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #2e4630;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+    .sidebar.open {
+      width: 250px;
+    }
+    .sidebar a {
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #c9d9c6;
+      display: block;
+    }
+    .sidebar a:hover {
+      background-color: #516a4f;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 25px;
+      cursor: pointer;
+      color: #c9d9c6;
+    }
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    section {
+      display: none;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    label, input, select, textarea, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #3b5a36;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #3b5a36;
+      color: white;
+    }
+    #search-input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .logout-btn {
+      background-color: #a33b3b;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="menu-btn" onclick="openMenu()">&#9776;</span>
+    GT Senter
+  </header>  <div class="sidebar" id="sidebar">
+    <span class="close-btn" onclick="closeMenu()">&#8592;</span>
+    <a href="#" onclick="showSection('form')">📝 نوبت‌گیری</a>
+    <a href="#" onclick="showSection('about')">ℹ️ درباره ما</a>
+    <a href="#" onclick="showSection('location')">📍 آدرس مغازه</a>
+    <a href="#" onclick="showSection('contact')">📞 تماس با ما</a>
+    <a href="#" onclick="showSection('admin')">🔒 ورود مدیر</a>
+    <a href="#" onclick="showSection('security')">🔐 خدمات امنیتی خودرو</a>
+  </div>  <main>
+    <section id="form">
+      <h2>فرم نوبت‌گیری مشتری</h2>
+      <form id="booking-form">
+        <label>نام و نام خانوادگی:</label>
+        <input type="text" id="name" required />
+        <label>شماره تلفن:</label>
+        <input type="tel" id="phone" required />
+        <label>نوع خودرو:</label>
+        <input type="text" id="car" />
+        <label>مشکل خودرو:</label>
+        <select id="problem">
+          <option value="">-- انتخاب مشکل --</option>
+          <option>روغن ریزی</option>
+          <option>صدای خودرو</option>
+          <option>کم کردن آب</option>
+          <option>گاز خوردن خودرو</option>
+          <option>مشکل دیگر</option>
+        </select>
+        <label>توضیحات:</label>
+        <textarea id="description" rows="4"></textarea>
+        <label>تاریخ پیشنهادی (شمسی):</label>
+        <input type="text" id="date" placeholder="مثلاً 1403/03/15" />
+        <label>ساعت پیشنهادی:</label>
+        <input type="time" id="time" />
+        <label><input type="checkbox" id="fuel" /> پر کردن باک سوخت</label>
+        <label><input type="checkbox" id="wash" /> شست‌وشوی خودرو</label>
+        <label><input type="checkbox" id="fluids" /> بررسی مایعات</label>
+        <label><input type="checkbox" id="tires" /> چک کردن باد لاستیک‌ها</label>
+        <button type="submit">ارسال نوبت</button>
+      </form>
+    </section><section id="about">
+  <h2>درباره ما</h2>
+  <p>ما یه مرکز تعمیر تخصصی خودرو هستیم با سال‌ها تجربه و اعتبار.</p>
+</section>
+
+<section id="location">
+  <h2>آدرس ما</h2>
+  <p>شهرستان رشت، بیجار بنه، بلوار امام رضا، خیابان سمیه سی</p>
+</section>
+
+<section id="contact">
+  <h2>تماس با ما</h2>
+  <p>شماره تماس: 09365466204</p>
+</section>
+
+<section id="security">
+  <h2>خدمات امنیتی خودرو</h2>
+  <p>نصب و راه‌اندازی دزدگیرهای پیشرفته، ردیاب GPS، قفل فرمان، ایموبیلایزر و سایر سیستم‌های ضد سرقت با گارانتی معتبر و پشتیبانی فنی حرفه‌ای.</p>
+</section>
+
+<section id="admin">
+  <h2>ورود مدیر</h2>
+  <input type="text" id="admin-user" placeholder="نام کاربری" />
+  <input type="password" id="admin-pass" placeholder="رمز عبور" />
+  <button onclick="loginAdmin()">ورود</button>
+</section>
+
+<section id="admin-panel" style="display:none">
+  <h2>پنل مدیریت</h2>
+  <textarea id="about-edit" rows="4"></textarea>
+  <button onclick="saveAbout()">ذخیره تغییرات درباره ما</button>
+  <hr />
+  <h3>لیست مشتریان</h3>
+  <input type="text" id="search-input" placeholder="جستجو بر اساس نام یا تلفن..." oninput="searchCustomers()" />
+  <p>تعداد کل مشتریان: <span id="customer-count">0</span></p>
+  <table>
+    <thead>
+      <tr>
+        <th>ردیف</th>
+        <th>نام</th>
+        <th>تلفن</th>
+        <th>نوع خودرو</th>
+        <th>مشکل</th>
+        <th>توضیحات</th>
+        <th>زمان نوبت</th>
+        <th>خدمات اضافی</th>
+        <th>حذف</th>
+      </tr>
+    </thead>
+    <tbody id="customer-table-body"></tbody>
+  </table>
+  <button class="logout-btn" onclick="logoutAdmin()">خروج از پنل مدیریت</button>
+</section>
+
+  </main>  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+    function showSection(id) {
+      document.querySelectorAll("main section").forEach(sec => (sec.style.display = "none"));
+      document.getElementById(id).style.display = "block";
+      closeMenu();
+    }
+    function saveCustomers(customers) {
+      localStorage.setItem("customers", JSON.stringify(customers));
+    }
+    function getCustomers() {
+      const data = localStorage.getItem("customers");
+      return data ? JSON.parse(data) : [];
+    }
+    function loadCustomersTable(customers) {
+      const tbody = document.getElementById("customer-table-body");
+      tbody.innerHTML = "";
+      customers.forEach((c, i) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${i + 1}</td>
+          <td>${c.name}</td>
+          <td>${c.phone}</td>
+          <td>${c.car}</td>
+          <td>${c.problem}</td>
+          <td>${c.description}</td>
+          <td>${c.datetime}</td>
+          <td>${c.services.join(", ")}</td>
+          <td><button onclick="deleteCustomer(${i})" style="background:#a33b3b; color:white; border:none; padding:5px 8px; border-radius:3px; cursor:pointer;">حذف</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById("customer-count").textContent = customers.length;
+    }
+    function deleteCustomer(index) {
+      if (confirm("آیا مطمئن هستید که می‌خواهید این مشتری را حذف کنید؟")) {
+        const customers = getCustomers();
+        customers.splice(index, 1);
+        saveCustomers(customers);
+        loadCustomersTable(customers);
+      }
+    }
+    function searchCustomers() {
+      const query = document.getElementById("search-input").value.trim().toLowerCase();
+      const customers = getCustomers();
+      const filtered = customers.filter(c =>
+        c.name.toLowerCase().includes(query) || c.phone.includes(query)
+      );
+      loadCustomersTable(filtered);
+    }
+    function loginAdmin() {
+      const user = document.getElementById("admin-user").value;
+      const pass = document.getElementById("admin-pass").value;
+      if (user === "admin" && pass === "123456") {
+        showSection("admin-panel");
+        document.getElementById("about-edit").value = document.querySelector("#about p").innerText;
+        document.getElementById("admin-user").value = "";
+        document.getElementById("admin-pass").value = "";
+        loadCustomersTable(getCustomers());
+      } else {
+        alert("نام کاربری یا رمز عبور اشتباه است");
+      }
+    }
+    function saveAbout() {
+      const text = document.getElementById("about-edit").value;
+      document.getElementById("about").innerHTML = `<h2>درباره ما</h2><p>${text}</p>`;
+      alert("درباره ما با موفقیت به‌روز شد");
+    }
+    function logoutAdmin() {
+      showSection("admin");
+      document.getElementById("customer-table-body").innerHTML = "";
+      document.getElementById("customer-count").textContent = "0";
+    }
+    document.getElementById("booking-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const car = document.getElementById("car").value;
+      const problem = document.getElementById("problem").value;
+      const desc = document.getElementById("description").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const datetime = `${date} ${time}`;
+      const fuel = document.getElementById("fuel").checked ? "پر کردن باک" : "";
+      const wash = document.getElementById("wash").checked ? "شستشو" : "";
+      const fluids = document.getElementById("fluids").checked ? "بررسی مایعات" : "";
+      const tires = document.getElementById("tires").checked ? "باد لاستیک" : "";
+      const services = [];
+      if (fuel) services.push(fuel);
+      if (wash) services.push(wash);
+      if (fluids) services.push(fluids);
+      if (tires) services.push(tires);
+      const customers = getCustomers();
+      customers.push({
+        name,
+        phone,
+        car,
+        problem,
+        description: desc,
+        datetime,
+        services,
+      });
+      saveCustomers(customers);
+      const text = `نام: ${name}%0Aتلفن: ${phone}%0Aنوع خودرو: ${car}%0Aمشکل: ${problem}%0Aتوضیحات: ${desc}%0Aزمان: ${datetime}%0A${services.map(s => "✅ " + s).join(" ")}`;
+      const url = `https://wa.me/989365466204?text=${text}`;
+      window.open(url, "_blank");
+      alert("نوبت شما ثبت شد و به واتس‌اپ ارسال گردید.");
+      this.reset();
+    });
+    showSection("form");
+  </script></body>
+</html>
